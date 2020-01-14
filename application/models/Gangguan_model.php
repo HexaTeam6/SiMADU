@@ -12,11 +12,12 @@ class Gangguan_model extends CI_Model{
         return $this->db->query('SELECT * FROM master_gangguan
 		WHERE status_aktif = "YES" 
 		AND kode_cabang not in (1)
+		AND kode_cabang = '.$_SESSION['kode_cabang'].'
 		ORDER BY kode_cabang DESC');
     }
 	
-	function get_data_cabang(){
-		return $this->db->query('SELECT * FROM master_cabang WHERE kode_cabang='.$_SESSION['kode_gangguan'].'');
+	function get_data_gangguan(){
+		return $this->db->query('SELECT * FROM master_gangguan WHERE kode_cabang='.$_SESSION['kode_cabang'].'');
 	}
 
     function input_data($data,$table){

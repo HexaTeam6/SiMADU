@@ -92,7 +92,7 @@ $this->load->view('template/side');
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group hidden" id="permasalahan_lain_input">
                         <label  class="col-sm-2 control-label">Permasalahan Lain</label>
                         <div class="col-sm-10">
                             <input autocomplete="off" type="text" class="form-control" id="permasalahan_lain" name="permasalahan_lain" placeholder="Permasalahan Lain">
@@ -144,7 +144,7 @@ $this->load->view('template/side');
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group hidden" id="perbaikan_lain_input">
                         <label  class="col-sm-2 control-label">Perbaikan Lain</label>
                         <div class="col-sm-10">
                             <input autocomplete="off" type="text" class="form-control" id="perbaikan_lain" name="perbaikan_lain" placeholder="Perbaikan Lain">
@@ -186,7 +186,7 @@ $this->load->view('template/side');
           <form class="form-horizontal">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel">Cabang</h4>
+            <h4 class="modal-title" id="myModalLabel">WO Gangguan</h4>
           </div>
           <div class="modal-body">              
                 <div class="box-body">
@@ -289,8 +289,42 @@ $this->load->view('template/side');
           </form>
         </div>
       </div>
-    </div> 
-      
+    </div>
+
+    <!-- Modal Add User -->
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- form start -->
+                <form class="form-horizontal" action="<?php echo site_url('Wo_gangguan_ctrl/addUser')?>" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">WO Gangguan</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label  class="col-sm-2 control-label">Pilih Delegasi</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="kode_user" name="kode_user">
+                                        <?php foreach ($user as $row):?>
+                                        <option value="<?= $row->kode_user; ?>"><?= $row->hak_akses." - ".$row->nama; ?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" id="kode_gangguan_user" name="kode_gangguan_user">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Default box -->
     <div class="box">        
         <div class="box-header">
@@ -335,6 +369,7 @@ $this->load->view('template/side');
                         <td class="nama_pelapor"><?php echo $row->nama_pelapor;?></td>
 
                         <input type="hidden" class="kode_gangguan" value="<?php echo $row->kode_gangguan;?>">
+                        <input type="hidden" class="kode_user" value="<?php echo $row->kode_user;?>">
                         <input type="hidden" class="no_hp" value="<?php echo $row->no_hp;?>">
                         <input type="hidden" class="pembatas_daya" value="<?php echo $row->pembatas_daya;?>">
                         <input type="hidden" class="permasalahan" value="<?php echo $row->permasalahan;?>">
@@ -346,31 +381,44 @@ $this->load->view('template/side');
                         <input type="hidden" class="nama_petugas2" value="<?php echo $row->nama_petugas2;?>">
 
                         <td align="center">
-						 <?php if ($this->session->userdata("39view")=="1"){?>
-							<a href='#'>
-                                <span data-placement='top' data-toggle='tooltip' title='Info'>
-                                <button class='btn btn-info btn-xs btnInfo' data-title='Info' data-toggle='modal' data-target='#infoModal' id="btnInfo">
-                                <span class='glyphicon glyphicon-ok'></span>
-                                </button>
-                            </a>
-						<?php }?>
-							
-							 <?php if ($this->session->userdata("39edit")=="1"){?>
-                            <a href='#'>
-                                <span data-placement='top' data-toggle='tooltip' title='Edit'>
-                                <button class='btn btn-warning btn-xs btnEdit' data-title='Edit' data-toggle='modal' data-target='#myModal' id="btnEdit">
-                                <span class='glyphicon glyphicon-pencil'></span>
-                                </button>
-                            </a>
 
-						<?php }?>
+                            <!-- Must be admin! -->
+                            <?php if ($this->session->userdata("39edit")=="1" && $_SESSION['kode_akses'] == 6){?>
+                                <a href='#'>
+                                    <?php $status = $row->kode_user ? "success" : "default"; ?>
+                                    <span data-placement='top' data-toggle='tooltip' title='User'>
+                                    <button class='btn btn-<?= $status; ?> btn-xs btnUser' data-title='User' data-toggle='modal' data-target='#userModal' id="btnUser">
+                                        <span class='glyphicon glyphicon-user'></span>
+                                    </button>
+                                </a>
+                            <?php }?>
+
+                             <?php if ($this->session->userdata("39view")=="1"){?>
+                                <a href='#'>
+                                    <span data-placement='top' data-toggle='tooltip' title='Info'>
+                                    <button class='btn btn-info btn-xs btnInfo' data-title='Info' data-toggle='modal' data-target='#infoModal' id="btnInfo">
+                                    <span class='glyphicon glyphicon-ok'></span>
+                                    </button>
+                                </a>
+                            <?php }?>
+
+                            <?php if ($this->session->userdata("39edit")=="1"){?>
+                                <a href='#'>
+                                    <span data-placement='top' data-toggle='tooltip' title='Edit'>
+                                    <button class='btn btn-warning btn-xs btnEdit' data-title='Edit' data-toggle='modal' data-target='#myModal' id="btnEdit">
+                                    <span class='glyphicon glyphicon-pencil'></span>
+                                    </button>
+                                </a>
+
+                            <?php }?>
+
 							<?php if ($this->session->userdata("39delete")=="1"){?>
-							<a href='#'>
-                                <span data-placement='top' data-toggle='tooltip' title='Delete'>
-                                <button class='btn btn-danger btn-xs btnDelete' data-title='Delete' data-toggle='modal' data-target='#deleteModal' id="btnDelete">
-                                <span class='glyphicon glyphicon-remove'></span>
-                                </button>
-                            </a>
+                                <a href='#'>
+                                    <span data-placement='top' data-toggle='tooltip' title='Delete'>
+                                    <button class='btn btn-danger btn-xs btnDelete' data-title='Delete' data-toggle='modal' data-target='#deleteModal' id="btnDelete">
+                                    <span class='glyphicon glyphicon-remove'></span>
+                                    </button>
+                                </a>
                            	<?php }?>
                         </td>
                     </tr>
@@ -411,6 +459,21 @@ $this->load->view('template/js');
             return false;
            });
     });
+
+    $("#permasalahan").change(function () {
+        if($("#permasalahan").val() == "Lain-lain")
+            $("#permasalahan_lain_input").removeClass("hidden");
+        else
+            $("#permasalahan_lain_input").addClass("hidden");
+    });
+
+      $("#perbaikan").change(function () {
+          if($("#perbaikan").val() == "Lain-lain")
+              $("#perbaikan_lain_input").removeClass("hidden");
+          else
+              $("#perbaikan_lain_input").addClass("hidden");
+      });
+
 	 $("#btnNew").click(function (){ 
 		$("#action").val("add");
          $("#kode_gangguan").val("");
@@ -437,11 +500,29 @@ $this->load->view('template/js');
         $("#nama_pelapor").val($item.find(".nama_pelapor").text());
         $("#no_hp").val($item.find(".no_hp").val());
         $("#pembatas_daya").val($item.find(".pembatas_daya").val());
-        $("#permasalahan").val($item.find(".permasalahan").val());
+
+        var exists =  0 != $('#permasalahan option[value="'+$item.find(".permasalahan").val()+'"]').length;
+        if (exists)
+            $("#permasalahan").val($item.find(".permasalahan").val());
+        else{
+            $("#permasalahan").val("Lain-lain");
+            $("#permasalahan_lain_input").removeClass("hidden");
+            $("#permasalahan_lain").val($item.find(".permasalahan").val());
+        }
+
         $("#keterangan").text($item.find(".keterangan").val());
         $("#kondisi").val($item.find(".kondisi").val());
         $("#tang_ampere").val($item.find(".tang_ampere").val());
-        $("#perbaikan").val($item.find(".perbaikan").val());
+
+        var exists =  0 != $('#perbaikan option[value="'+$item.find(".perbaikan").val()+'"]').length;
+        if (exists)
+            $("#perbaikan").val($item.find(".perbaikan").val());
+        else{
+            $("#perbaikan").val("Lain-lain");
+            $("#perbaikan_lain_input").removeClass("hidden");
+            $("#perbaikan_lain").val($item.find(".perbaikan").val());
+        }
+
         $("#nama_petugas1").val($item.find(".nama_petugas1").val());
         $("#nama_petugas2").val($item.find(".nama_petugas2").val());
         $("#action").val("edit");
@@ -467,6 +548,12 @@ $this->load->view('template/js');
         $("#wo_gangguan_delete").text('Yakin menghapus data WO Gangguan dari '+ $item.find(".nama_pelapor").text() + ' nomor meter ' + $item.find(".no_meter").text() + ' ?');
 		$("#kode_gangguan_delete").val($item.find("input[id$='kode_gangguan']:hidden:first").val());
     });
+      $('#datatable').on('click', '[id^=btnUser]', function() {
+          var $item = $(this).closest("tr");
+          $("#kode_user").val($item.find(".kode_user").val());
+          console.log($item.find(".kode_user").val());
+          $("#kode_gangguan_user").val($item.find(".kode_gangguan").val());
+      });
   });
 </script>   
 <?php

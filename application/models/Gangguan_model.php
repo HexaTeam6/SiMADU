@@ -9,11 +9,20 @@ class Gangguan_model extends CI_Model{
     }
     
     function tampil_data(){
-        return $this->db->query('SELECT * FROM master_gangguan
-		WHERE status_aktif = "YES" 
-		AND kode_cabang not in (1)
-		AND kode_cabang = '.$_SESSION['kode_cabang'].'
-		ORDER BY kode_cabang DESC');
+        if($_SESSION['kode_akses'] == 1 || $_SESSION['kode_akses'] == 6){
+            return $this->db->query('SELECT * FROM master_gangguan
+            WHERE status_aktif = "YES" 
+            AND kode_cabang not in (1)
+            AND kode_cabang = '.$_SESSION['kode_cabang'].'
+            ORDER BY kode_cabang DESC');
+        }else{
+            return $this->db->query('SELECT * FROM master_gangguan
+            WHERE status_aktif = "YES" 
+            AND kode_cabang not in (1)
+            AND kode_cabang = '.$_SESSION['kode_cabang'].'
+            AND kode_user = '.$_SESSION['kode_user'].'
+            ORDER BY kode_cabang DESC');
+        }
     }
 	
 	function get_data_gangguan(){

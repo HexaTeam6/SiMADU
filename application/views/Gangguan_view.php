@@ -307,6 +307,7 @@ $this->load->view('template/side');
                                 <label  class="col-sm-2 control-label">Pilih Delegasi</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" id="kode_user" name="kode_user">
+                                        <option value="0">-</option>
                                         <?php foreach ($user as $row):?>
                                         <option value="<?= $row->kode_user; ?>"><?= $row->hak_akses." - ".$row->nama; ?></option>
                                         <?php endforeach;?>
@@ -329,10 +330,11 @@ $this->load->view('template/side');
     <div class="box">        
         <div class="box-header">
           <h3 class="box-title">
+
 		  <?php if ($this->session->userdata("39insert")=="1"){?>
               <button type="button" class="btn btn-primary" id="btnNew" data-toggle="modal" data-target="#myModal">New</button>
-			<?php }?>
-           
+			<?php } ?>
+
           </h3>
           <?php if (isset($_SESSION['msg'])) {?>  
           <div class="alert alert-success alert-dismissible">

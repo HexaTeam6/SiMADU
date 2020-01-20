@@ -2,22 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea78762e-b3c9-485e-bd53-8196b0899750" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/prints/Lap_gangguan_print.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/application/views/prints/Lap_arus_kas_print.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/application/views/prints/home.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/application/views/prints/welcome_message.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/API_ctrl.php" afterPath="$PROJECT_DIR$/application/controllers/API_ctrl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Histori_gangguan_ctrl.php" afterPath="$PROJECT_DIR$/application/controllers/Histori_gangguan_ctrl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Pelanggan_ctrl.php" afterPath="$PROJECT_DIR$/application/controllers/Pelanggan_ctrl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Wo_gangguan_ctrl.php" afterPath="$PROJECT_DIR$/application/controllers/Wo_gangguan_ctrl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Gangguan_model.php" afterPath="$PROJECT_DIR$/application/models/Gangguan_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Pelanggan_model.php" afterPath="$PROJECT_DIR$/application/models/Pelanggan_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/Gangguan_view.php" afterPath="$PROJECT_DIR$/application/views/Gangguan_view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/Histori_gangguan_view.php" afterPath="$PROJECT_DIR$/application/views/Histori_gangguan_view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/template/head.php" afterPath="$PROJECT_DIR$/application/views/template/head.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/template/js.php" afterPath="$PROJECT_DIR$/application/views/template/js.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -104,8 +90,8 @@
       <file leaf-file-name="API_ctrl.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/API_ctrl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="73" column="45" lean-forward="true" selection-start-line="73" selection-start-column="45" selection-end-line="73" selection-end-column="45" />
+            <state relative-caret-position="488">
+              <caret line="80" column="63" lean-forward="false" selection-start-line="80" selection-start-column="63" selection-end-line="80" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -417,12 +403,12 @@
       <workItem from="1579279508885" duration="7444000" />
       <workItem from="1579337260720" duration="18055000" />
       <workItem from="1579488192158" duration="121000" />
-      <workItem from="1579500483990" duration="5876000" />
+      <workItem from="1579500483990" duration="6972000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94732000" />
+    <option name="totallyTimeSpent" value="95828000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="0" />
@@ -435,7 +421,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32872504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -849,8 +835,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/API_ctrl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="73" column="45" lean-forward="true" selection-start-line="73" selection-start-column="45" selection-end-line="73" selection-end-column="45" />
+        <state relative-caret-position="488">
+          <caret line="80" column="63" lean-forward="false" selection-start-line="80" selection-start-column="63" selection-end-line="80" selection-end-column="63" />
           <folding />
         </state>
       </provider>

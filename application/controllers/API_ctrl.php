@@ -72,7 +72,13 @@ class API_ctrl extends CI_Controller {
         $this->Gangguan_model->update_data($data, 'master_gangguan', $kode_gangguan);
 
         $foto = $this->input->post('foto[]');
-        $this->Gangguan_model->insert_data($foto, 'detail_foto_gangguan');
+        for ($i = 0; $i < count($foto); $i++){
+            $fotos[] = array(
+                'kode_gangguan' => 12,
+                'foto'          => $foto[$i]
+            );
+        }
+        $this->db->insert_batch('detail_foto_gangguan', $fotos);
     }
 
     public function update()

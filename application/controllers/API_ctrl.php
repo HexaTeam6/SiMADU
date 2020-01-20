@@ -33,6 +33,7 @@ class API_ctrl extends CI_Controller {
 
     public function updateWoGangguan(){
 
+        $kode_pelanggan     = $this->input->post('kode_pelanggan');
         $kode_gangguan      = $this->input->post('kode_gangguan');
         $lang_lot           = $this->input->post('lang_lot');
         $nama_pelapor       = $this->input->post('nama_pelapor');
@@ -52,7 +53,6 @@ class API_ctrl extends CI_Controller {
         $status_wo          = $this->input->post('status_wo');
 
         $data = array(
-            'lang_lot'              => $lang_lot,
             'nama_pelapor'          => $nama_pelapor,
             'no_hp'                 => $no_hp,
             'alamat_gangguan'       => $alamat_gangguan,
@@ -69,7 +69,10 @@ class API_ctrl extends CI_Controller {
             'ttd_pelanggan'         => $ttd_pelanggan,
             'status_wo'             => "Selesai"
         );
-        $this->Gangguan_model->update_data($data, 'master_gangguan', $kode_gangguan);
+
+        $pelanggan = array(
+            'lang_lot'  => $lang_lot
+        );
 
         $foto = $this->input->post('foto[]');
         for ($i = 0; $i < count($foto); $i++){
@@ -78,6 +81,9 @@ class API_ctrl extends CI_Controller {
                 'foto'          => $foto[$i]
             );
         }
+
+        $this->Gangguan_model->update_data($data, 'master_gangguan', $kode_gangguan);
+        $this->Pelanggan_model->update_data($pelanggan, 'master_pelanggan', $kode_pelanggan);
         $this->db->insert_batch('detail_foto_gangguan', $fotos);
     }
 

@@ -32,20 +32,12 @@ class API_ctrl extends CI_Controller {
     }
 
     public function updateWoGangguan(){
+
         $kode_gangguan      = $this->input->post('kode_gangguan');
-
-        $kode_pelanggan     = $this->input->post('kode_pelanggan');
-        $no_meter           = $this->input->post('no_meter');
-        $nama_pelanggan     = $this->input->post('nama_pelanggan');
-        $alamat_pelanggan   = $this->input->post('alamat_pelanggan');
-        $tarif              = $this->input->post('tarif');
-        $daya               = $this->input->post('daya');
-        $jenis_pelanggan    = $this->input->post('jenis_pelanggan');
         $lang_lot           = $this->input->post('lang_lot');
-
-        $no_lapor           = $this->input->post('no_lapor');
         $nama_pelapor       = $this->input->post('nama_pelapor');
         $no_hp              = $this->input->post('no_hp');
+        $alamat_gangguan    = $this->input->post('alamat_gangguan');
         $pembatas_daya      = $this->input->post('pembatas_daya');
         $permasalahan       = $this->input->post('permasalahan');
         $keterangan         = $this->input->post('keterangan');
@@ -54,6 +46,33 @@ class API_ctrl extends CI_Controller {
         $perbaikan          = $this->input->post('perbaikan');
         $nama_petugas1      = $this->input->post('nama_petugas1');
         $nama_petugas2      = $this->input->post('nama_petugas2');
+        $tanggal_pemeriksaan= $this->input->post('tanggal_pemeriksaan');
+        $ttd_petugas        = $this->input->post('ttd_petugas');
+        $ttd_pelanggan      = $this->input->post('ttd_pelanggan');
+        $status_wo          = $this->input->post('status_wo');
+
+        $data = array(
+            'lang_lot'              => $lang_lot,
+            'nama_pelapor'          => $nama_pelapor,
+            'no_hp'                 => $no_hp,
+            'alamat_gangguan'       => $alamat_gangguan,
+            'pembatas_daya'         => $pembatas_daya,
+            'permasalahan'          => $permasalahan,
+            'keterangan'            => $keterangan,
+            'kondisi'               => $kondisi,
+            'tang_ampere'           => $tang_ampere,
+            'perbaikan'             => $perbaikan,
+            'nama_petugas1'         => $nama_petugas1,
+            'nama_petugas2'         => $nama_petugas2,
+            'tanggal_pemeriksaan'   => $tanggal_pemeriksaan,
+            'ttd_petugas'           => $ttd_petugas,
+            'ttd_pelanggan'         => $ttd_pelanggan,
+            'status_wo'             => "Selesai"
+        );
+        $this->Gangguan_model->update_data($data, 'master_gangguan', $kode_gangguan);
+
+        $foto = $this->input->post('foto[]');
+        $this->Gangguan_model->insert_data($foto, 'detail_foto_gangguan');
     }
 
     public function update()

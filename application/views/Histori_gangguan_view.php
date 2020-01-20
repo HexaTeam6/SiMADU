@@ -32,14 +32,14 @@ $this->load->view('template/side');
           <div class="modal-body">              
                 <div class="box-body">
 
-                    <div class="form-group">
-                        <label  class="col-sm-4 control-label">Nomor Meter</label>
-                        <div class="col-sm-8" id="no_meter_info"></div>
-                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <label  class="col-sm-4 control-label">Nomor Meter</label>-->
+<!--                        <div class="col-sm-8" id="no_meter_info"></div>-->
+<!--                    </div>-->
 
                     <div class="form-group">
                         <label  class="col-sm-4 control-label">ID Pelanggan</label>
-                        <div class="col-sm-8" id="id_pelanggan_info"></div>
+                        <div class="col-sm-8" id="kode_pelanggan_info"></div>
                     </div>
 
                     <div class="form-group">
@@ -111,7 +111,6 @@ $this->load->view('template/side');
     <div class="box">        
         <div class="box-header">
           <h3 class="box-title">
-
           </h3>
         </div>
         <!-- /.box-header -->
@@ -121,7 +120,7 @@ $this->load->view('template/side');
             <tr>
               <th>No.</th>
               <th>ID Pelanggan</th>
-              <th>Nomor Meter</th>
+<!--              <th>Nomor Meter</th>-->
               <th>Nomor Lapor</th>
               <th>Nama Pelapor</th>
               <th>Actions</th>
@@ -135,8 +134,8 @@ $this->load->view('template/side');
                     <tr>
                         
                         <td class="no" width=5% ><?php echo $no ?></td>
-                        <td class="id_pelanggan"><?php echo $row->id_pelanggan; ?></td>
-                        <td class="no_meter"><?php echo $row->no_meter;?></td>
+                        <td class="kode_pelanggan"><?php echo $row->kode_pelanggan; ?></td>
+<!--                        <td class="no_meter">--><?php //echo $row->no_meter;?><!--</td>-->
                         <td class="no_lapor"><?php echo $row->no_lapor;?></td>
                         <td class="nama_pelapor"><?php echo $row->nama_pelapor;?></td>
 
@@ -153,6 +152,12 @@ $this->load->view('template/side');
                         <input type="hidden" class="nama_petugas2" value="<?php echo $row->nama_petugas2;?>">
 
                         <td align="center">
+                            <a href='#'>
+                                <span data-placement='top' data-toggle='tooltip' title='Print'>
+                                <button class='btn btn-default btn-xs btnPrint' data-title='Print' id="btnPrint">
+                                <span class='glyphicon glyphicon-print'></span>
+                                </button>
+                            </a>
 
                              <?php if ($this->session->userdata("39view")=="1"){?>
                                 <a href='#'>
@@ -196,16 +201,21 @@ $this->load->view('template/js');
     $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
         $(".alert-sucess").slideUp(500);
     });
-    $(".btnSave").click(function (){ 
-        $('#form-horizontal').submit(function () {
-            return false;
-           });
-    });
 
-	$('#datatable').on('click', '[id^=btnInfo]', function() {
+      $('#datatable').on('click', '[id^=btnPrint]', function() {
+          var $item = $(this).closest("tr");
+          var url = '<?php echo site_url("/Histori_gangguan_ctrl/laporan_print/");?>' + $item.find(".kode_gangguan").val();
+//          console.log(url);
+          newwindow=window.open(url,'Print','height=500,width=1100');
+          if (window.focus) {newwindow.focus()}
+          return false;
+      });
+
+
+      $('#datatable').on('click', '[id^=btnInfo]', function() {
         var $item = $(this).closest("tr");
-        $("#id_pelanggan_info").text($item.find(".id_pelanggan").text());
-        $("#no_meter_info").text($item.find(".no_meter").text());
+        $("#kode_pelanggan_info").text($item.find(".kode_pelanggan").text());
+//        $("#no_meter_info").text($item.find(".no_meter").text());
         $("#no_lapor_info").text($item.find(".no_lapor").text());
         $("#nama_pelapor_info").text($item.find(".nama_pelapor").text());
         $("#no_hp_info").text($item.find(".no_hp").val());

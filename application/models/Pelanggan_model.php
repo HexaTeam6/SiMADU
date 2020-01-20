@@ -16,8 +16,12 @@ class Pelanggan_model extends CI_Model{
 		ORDER BY kode_cabang DESC');
     }
 	
-	function get_data_cabang(){
-		return $this->db->query('SELECT * FROM master_pelanggan WHERE kode_cabang='.$_SESSION['kode_cabang'].'');
+	function get_data_pelanggan($kode_pelanggan){
+		return $this->db->query('SELECT * FROM master_pelanggan
+		WHERE status_aktif = "YES" 
+		AND kode_cabang not in (1)
+		AND kode_cabang = '.$_SESSION['kode_cabang'].'
+		AND kode_pelanggan = '.$kode_pelanggan.'');
 	}
 
     function input_data($data,$table){

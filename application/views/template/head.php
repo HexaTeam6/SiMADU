@@ -21,6 +21,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url('assets/ionicons-2.0.1/css/ionicons.min.css')?>">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE-2.3.7/plugins/datatables/dataTables.bootstrap.css')?>">
+  <!--Select2-->
+  <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE-2.3.7/plugins/select2/select2.min.css')?>">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE-2.3.7/dist/css/AdminLTE.min.css')?>">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter

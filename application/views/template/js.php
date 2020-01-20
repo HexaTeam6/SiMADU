@@ -22,6 +22,8 @@
 <script src="<?php echo base_url('assets/jquery-inputmask/jquery.inputmask.bundle.js')?>"></script>
 <!-- Knockout -->
 <script src="<?php echo base_url('assets/knockout/knockout-3.4.1.js')?>"></script>
+<!--Select2-->
+<script src="<?php echo base_url('assets/AdminLTE-2.3.7/plugins/select2/select2.min.js')?>"></script>
 
 
 

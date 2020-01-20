@@ -31,7 +31,7 @@ class Pelanggan_ctrl extends CI_Controller {
         $tarif              = $this->input->post('tarif');
         $daya               = $this->input->post('daya');
         $jenis_pelanggan    = $this->input->post('jenis_pelanggan');
-        $long_lat           = $this->input->post('longitude')." ".$this->input->post('latitude');
+        $long_lat           = $this->input->post('latitude').", ".$this->input->post('longitude');
         $data = array(
             'kode_pelanggan'    => $kode_pelanggan,
             'kode_cabang'       => $kode_cabang,

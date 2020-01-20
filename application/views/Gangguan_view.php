@@ -19,7 +19,7 @@ $this->load->view('template/side');
 <!-- Main content -->
 <section class="content">
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <!-- form start -->
@@ -34,16 +34,27 @@ $this->load->view('template/side');
                   <div class="form-group">
                     <label  class="col-sm-2 control-label">Nomor Meter</label>
                     <div class="col-sm-10">
-                      <input autocomplete="off" type="text" class="form-control" id="no_meter" name="no_meter" placeholder="Nomor Meter">
+                      <input autocomplete="off" type="text" readonly class="form-control" id="no_meter" name="no_meter" placeholder="Nomor Meter">
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <label  class="col-sm-2 control-label">ID Pelanggan</label>
-                    <div class="col-sm-10">
-                      <input autocomplete="off" type="text" class="form-control" id="id_pelanggan" name="id_pelanggan" placeholder="ID Pelanggan">
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label">ID Pelanggan</label>
+                        <div class="col-sm-10">
+                            <select class="form-control kode_pelanggan_select" id="kode_pelanggan" name="kode_pelanggan">
+                                <?php foreach ($pelanggan as $row):?>
+                                <option value="<?= $row->kode_pelanggan?>"><?= $row->kode_pelanggan?> - <?= $row->nama_pelanggan?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
                     </div>
-                  </div>
+
+<!--                  <div class="form-group">-->
+<!--                    <label  class="col-sm-2 control-label">ID Pelanggan</label>-->
+<!--                    <div class="col-sm-10">-->
+<!--                      <input autocomplete="off" type="text" class="form-control" id="kode_pelanggan" name="kode_pelanggan" placeholder="ID Pelanggan">-->
+<!--                    </div>-->
+<!--                  </div>-->
 
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">Nomor Lapor</label>
@@ -67,6 +78,14 @@ $this->load->view('template/side');
                   </div>
 
                     <div class="form-group">
+                        <label  class="col-sm-2 control-label">Alamat Gangguan</label>
+                        <div class="col-sm-10">
+                            <input autocomplete="off" type="text" class="form-control" id="alamat_gangguan" name="alamat_gangguan" placeholder="Alamat Gangguan">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
                         <label  class="col-sm-2 control-label">Pembatas Daya</label>
                         <div class="col-sm-10">
                             <input autocomplete="off" type="text" class="form-control" id="pembatas_daya" name="pembatas_daya" placeholder="Pembatas Daya">
@@ -76,7 +95,7 @@ $this->load->view('template/side');
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">Permasalahan</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="permasalahan" name="permasalahan">
+                            <select class="form-control permasalahan_select" id="permasalahan" name="permasalahan">
                                 <option value="kWh Meter Macet">kWh Meter Macet</option>
                                 <option value="kWh Meter Terblokir">kWh Meter Terblokir</option>
                                 <option value="Wiring kWh Meter Terbakar">Wiring kWh Meter Terbakar</option>
@@ -87,17 +106,16 @@ $this->load->view('template/side');
                                 <option value="PT Terbakar">PT Terbakar</option>
                                 <option value="Relay Mati">Relay Mati</option>
                                 <option value="Kubikel Rusak">Kubikel Rusak</option>
-                                <option value="Lain-lain">Lain-lain</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="form-group hidden" id="permasalahan_lain_input">
-                        <label  class="col-sm-2 control-label">Permasalahan Lain</label>
-                        <div class="col-sm-10">
-                            <input autocomplete="off" type="text" class="form-control" id="permasalahan_lain" name="permasalahan_lain" placeholder="Permasalahan Lain">
-                        </div>
-                    </div>
+<!--                    <div class="form-group hidden" id="permasalahan_lain_input">-->
+<!--                        <label  class="col-sm-2 control-label">Permasalahan Lain</label>-->
+<!--                        <div class="col-sm-10">-->
+<!--                            <input autocomplete="off" type="text" class="form-control" id="permasalahan_lain" name="permasalahan_lain" placeholder="Permasalahan Lain">-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">Keterangan</label>
@@ -127,7 +145,7 @@ $this->load->view('template/side');
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">Perbaikan</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="perbaikan" name="perbaikan">
+                            <select class="form-control perbaikan_select" id="perbaikan" name="perbaikan">
                                 <option value="Penormalan CT">Penormalan CT</option>
                                 <option value="WO Ganti kWh Meter Macet">WO Ganti kWh Meter Macet</option>
                                 <option value="WO Ganti Kabel Wiring kWh Mater Terbakar">WO Ganti Kabel Wiring kWh Mater Terbakar</option>
@@ -139,17 +157,16 @@ $this->load->view('template/side');
                                 <option value="WO Ganti PT Terbakar">WO Ganti PT Terbakar</option>
                                 <option value="WO Ganti Relay Mati">WO Ganti Relay Mati</option>
                                 <option value="WO Gani Kubik Rusak">WO Gani Kubik Rusak</option>
-                                <option value="Lain-lain">Lain-lain</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="form-group hidden" id="perbaikan_lain_input">
-                        <label  class="col-sm-2 control-label">Perbaikan Lain</label>
-                        <div class="col-sm-10">
-                            <input autocomplete="off" type="text" class="form-control" id="perbaikan_lain" name="perbaikan_lain" placeholder="Perbaikan Lain">
-                        </div>
-                    </div>
+<!--                    <div class="form-group hidden" id="perbaikan_lain_input">-->
+<!--                        <label  class="col-sm-2 control-label">Perbaikan Lain</label>-->
+<!--                        <div class="col-sm-10">-->
+<!--                            <input autocomplete="off" type="text" class="form-control" id="perbaikan_lain" name="perbaikan_lain" placeholder="Perbaikan Lain">-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">Nama Petugas 1</label>
@@ -198,7 +215,7 @@ $this->load->view('template/side');
 
                     <div class="form-group">
                         <label  class="col-sm-4 control-label">ID Pelanggan</label>
-                        <div class="col-sm-8" id="id_pelanggan_info"></div>
+                        <div class="col-sm-8" id="kode_pelanggan_info"></div>
                     </div>
 
                     <div class="form-group">
@@ -214,6 +231,11 @@ $this->load->view('template/side');
                     <div class="form-group">
                         <label  class="col-sm-4 control-label">Nomor Hp</label>
                         <div class="col-sm-8" id="no_hp_info"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label  class="col-sm-4 control-label">Alamat Gangguan</label>
+                        <div class="col-sm-8" id="alamat_gangguan_info"></div>
                     </div>
 
                     <div class="form-group">
@@ -351,7 +373,7 @@ $this->load->view('template/side');
             <tr>
               <th>No.</th>
               <th>ID Pelanggan</th>
-              <th>Nomor Meter</th>
+<!--              <th>Nomor Meter</th>-->
               <th>Nomor Lapor</th>
               <th>Nama Pelapor</th>
               <th>Actions</th>
@@ -365,14 +387,15 @@ $this->load->view('template/side');
                     <tr>
                         
                         <td class="no" width=5% ><?php echo $no ?></td>
-                        <td class="id_pelanggan"><?php echo $row->id_pelanggan; ?></td>
-                        <td class="no_meter"><?php echo $row->no_meter;?></td>
+                        <td class="kode_pelanggan"><?php echo $row->kode_pelanggan; ?></td>
+<!--                        <td class="no_meter">--><?php //echo $row->no_meter;?><!--</td>-->
                         <td class="no_lapor"><?php echo $row->no_lapor;?></td>
                         <td class="nama_pelapor"><?php echo $row->nama_pelapor;?></td>
 
                         <input type="hidden" class="kode_gangguan" value="<?php echo $row->kode_gangguan;?>">
                         <input type="hidden" class="kode_user" value="<?php echo $row->kode_user;?>">
                         <input type="hidden" class="no_hp" value="<?php echo $row->no_hp;?>">
+                        <input type="hidden" class="alamat_gangguan" value="<?php echo $row->alamat_gangguan;?>">
                         <input type="hidden" class="pembatas_daya" value="<?php echo $row->pembatas_daya;?>">
                         <input type="hidden" class="permasalahan" value="<?php echo $row->permasalahan;?>">
                         <input type="hidden" class="keterangan" value="<?php echo $row->keterangan;?>">
@@ -453,6 +476,46 @@ $this->load->view('template/js');
       "info": true,
       "autoWidth": false
     });
+
+    $(".kode_pelanggan_select").select2({
+        width : '100%',
+        tags: true,
+        allowClear : true,
+        placeholder: "ID Pelanggan",
+        dropdownParent: $("#myModal")
+    });
+
+      $(".permasalahan_select").select2({
+          width : '100%',
+          tags: true,
+          allowClear : true,
+          placeholder: "Permasalahan",
+          dropdownParent: $("#myModal")
+      });
+
+      $(".perbaikan_select").select2({
+          width : '100%',
+          tags: true,
+          allowClear : true,
+          placeholder: "Perbaikan",
+          dropdownParent: $("#myModal")
+      });
+
+      $(".kode_pelanggan_select").on("select2:select", function (e) {
+          var kode_pelanggan = $("#kode_pelanggan").val();
+          $.ajax({
+              url: "<?php echo site_url("/Wo_gangguan_ctrl/getDataPelanggan/");?>",
+              dataType: 'text',
+              type: "POST",
+              contentType: 'application/x-www-form-urlencoded',
+              data: {"kode_pelanggan": kode_pelanggan},
+              success: function (result) {
+                  var result = JSON.parse(result);
+                  $("#no_meter").val(result.no_meter);
+              }
+          });
+      });
+
     $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
         $(".alert-sucess").slideUp(500);
     });
@@ -462,68 +525,68 @@ $this->load->view('template/js');
            });
     });
 
-    $("#permasalahan").change(function () {
-        if($("#permasalahan").val() == "Lain-lain")
-            $("#permasalahan_lain_input").removeClass("hidden");
-        else
-            $("#permasalahan_lain_input").addClass("hidden");
-    });
-
-      $("#perbaikan").change(function () {
-          if($("#perbaikan").val() == "Lain-lain")
-              $("#perbaikan_lain_input").removeClass("hidden");
-          else
-              $("#perbaikan_lain_input").addClass("hidden");
-      });
+//    $("#permasalahan").change(function () {
+//        if($("#permasalahan").val() == "Lain-lain")
+//            $("#permasalahan_lain_input").removeClass("hidden");
+//        else
+//            $("#permasalahan_lain_input").addClass("hidden");
+//    });
+//
+//      $("#perbaikan").change(function () {
+//          if($("#perbaikan").val() == "Lain-lain")
+//              $("#perbaikan_lain_input").removeClass("hidden");
+//          else
+//              $("#perbaikan_lain_input").addClass("hidden");
+//      });
 
 	 $("#btnNew").click(function (){ 
 		$("#action").val("add");
          $("#kode_gangguan").val("");
-         $("#id_pelanggan").val("");
+         $("#kode_pelanggan").val(null).trigger('change');
          $("#no_meter").val("");
          $("#no_lapor").val("");
          $("#nama_pelapor").val("");
          $("#no_hp").val("");
+         $("#alamat_gangguan").val("");
          $("#pembatas_daya").val("");
-         $("#permasalahan").val("");
+         $("#permasalahan").val(null).trigger('change');
          $("#keterangan").text("");
          $("#kondisi").val("");
          $("#tang_ampere").val("");
-         $("#perbaikan").val("");
+         $("#perbaikan").val(null).trigger('change');
          $("#nama_petugas1").val("");
          $("#nama_petugas2").val("");
     });
     $('#datatable').on('click', '[id^=btnEdit]', function() {
         var $item = $(this).closest("tr");     
         $("#kode_gangguan").val($item.find(".kode_gangguan").val());
-        $("#id_pelanggan").val($item.find(".id_pelanggan").text());
+        $("#kode_pelanggan").val($item.find(".kode_pelanggan").text());
         $("#no_meter").val($item.find(".no_meter").text());
         $("#no_lapor").val($item.find(".no_lapor").text());
         $("#nama_pelapor").val($item.find(".nama_pelapor").text());
         $("#no_hp").val($item.find(".no_hp").val());
+        $("#alamat_gangguan").val($item.find(".alamat_gangguan").val());
         $("#pembatas_daya").val($item.find(".pembatas_daya").val());
 
-        var exists =  0 != $('#permasalahan option[value="'+$item.find(".permasalahan").val()+'"]').length;
-        if (exists)
-            $("#permasalahan").val($item.find(".permasalahan").val());
-        else{
-            $("#permasalahan").val("Lain-lain");
-            $("#permasalahan_lain_input").removeClass("hidden");
-            $("#permasalahan_lain").val($item.find(".permasalahan").val());
-        }
+        var data = {
+            val: $item.find(".permasalahan").val(),
+            text: $item.find(".permasalahan").val()
+        };
+
+        var newOption = new Option(data.text, data.val, false, false);
+        $('.permasalahan_select').append(newOption).trigger('change').val(data.text);
 
         $("#keterangan").text($item.find(".keterangan").val());
         $("#kondisi").val($item.find(".kondisi").val());
         $("#tang_ampere").val($item.find(".tang_ampere").val());
 
-        var exists =  0 != $('#perbaikan option[value="'+$item.find(".perbaikan").val()+'"]').length;
-        if (exists)
-            $("#perbaikan").val($item.find(".perbaikan").val());
-        else{
-            $("#perbaikan").val("Lain-lain");
-            $("#perbaikan_lain_input").removeClass("hidden");
-            $("#perbaikan_lain").val($item.find(".perbaikan").val());
-        }
+        var data = {
+            val: $item.find(".perbaikan").val(),
+            text: $item.find(".perbaikan").val()
+        };
+
+        var newOption = new Option(data.text, data.val, false, false);
+        $('.perbaikan_select').append(newOption).trigger('change').val(data.text);
 
         $("#nama_petugas1").val($item.find(".nama_petugas1").val());
         $("#nama_petugas2").val($item.find(".nama_petugas2").val());
@@ -531,11 +594,12 @@ $this->load->view('template/js');
     });
 	$('#datatable').on('click', '[id^=btnInfo]', function() {
         var $item = $(this).closest("tr");
-        $("#id_pelanggan_info").text($item.find(".id_pelanggan").text());
+        $("#kode_pelanggan_info").text($item.find(".kode_pelanggan").text());
         $("#no_meter_info").text($item.find(".no_meter").text());
         $("#no_lapor_info").text($item.find(".no_lapor").text());
         $("#nama_pelapor_info").text($item.find(".nama_pelapor").text());
         $("#no_hp_info").text($item.find(".no_hp").val());
+        $("#alamat_gangguan_info").text($item.find(".alamat_gangguan").val());
         $("#pembatas_daya_info").text($item.find(".pembatas_daya").val());
         $("#permasalahan_info").text($item.find(".permasalahan").val());
         $("#keterangan_info").text($item.find(".keterangan").val());
@@ -548,7 +612,7 @@ $this->load->view('template/js');
 	$('#datatable').on('click', '[id^=btnDelete]', function() {
         var $item = $(this).closest("tr");
         $("#wo_gangguan_delete").text('Yakin menghapus data WO Gangguan dari '+ $item.find(".nama_pelapor").text() + ' nomor meter ' + $item.find(".no_meter").text() + ' ?');
-		$("#kode_gangguan_delete").val($item.find("input[id$='kode_gangguan']:hidden:first").val());
+		$("#kode_gangguan_delete").val($item.find(".kode_gangguan").val());
     });
       $('#datatable').on('click', '[id^=btnUser]', function() {
           var $item = $(this).closest("tr");

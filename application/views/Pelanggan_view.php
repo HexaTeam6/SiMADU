@@ -8,7 +8,7 @@ $this->load->view('template/side');
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Cabang
+        Pelanggan
         <small>List Pelanggan</small>
       </h1>
       <ol class="breadcrumb">
@@ -245,13 +245,17 @@ $this->load->view('template/side');
                         <td class="no_meter"><?php echo $row->no_meter; ?></td>
                         <td class="nama_pelanggan"><?php echo $row->nama_pelanggan; ?></td>
                         <td class="alamat_pelanggan"><?php echo $row->alamat_pelanggan; ?></td>
-                        <td class="jenis_pelanggan"><?php echo $row->jenis_pelanggan;?></td>
+                        <td><?php echo $row->jenis_pelanggan=="1"? "Prabayar" : "Pascabayar";?></td>
 
+                        <input type="hidden" class="jenis_pelanggan" value="<?php echo $row->jenis_pelanggan;?>">
                         <input type="hidden" class="tarif" value="<?php echo $row->tarif;?>">
                         <input type="hidden" class="daya" value="<?php echo $row->daya;?>">
-                        <?php $exp = explode(" ", $row->long_lat); ?>
+
+                        <?php if ($row->long_lat != ""){
+                        $exp = explode(",", $row->long_lat); ?>
                         <input type="hidden" class="longitude" value="<?php echo $exp[0]; ?>">
                         <input type="hidden" class="latitude" value="<?php echo $exp[1]; ?>">
+                        <?php }?>
 
                         <td align="center">
 						 <?php if ($this->session->userdata("57view")=="1"){?>
@@ -341,7 +345,7 @@ $this->load->view('template/js');
         $("#alamat_pelanggan").val($.trim($item.find(".alamat_pelanggan").text()));
         $("#tarif").val($.trim($item.find(".tarif").val()));
         $("#daya").val($.trim($item.find(".daya").val()));
-        $("#jenis_pelanggan").val($.trim($item.find(".jenis_pelanggan").text()));
+        $("#jenis_pelanggan").val($.trim($item.find(".jenis_pelanggan").val()));
         $("#longitude").val($.trim($item.find(".longitude").val()));
         $("#latitude").val($.trim($item.find(".latitude").val()));
         $("#action").val("edit");

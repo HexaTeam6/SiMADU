@@ -8,6 +8,7 @@ class API_ctrl extends CI_Controller {
         parent::__construct();		
         $this->load->model('API_model');
         $this->load->model('Gangguan_model');
+        $this->load->model('Pelanggan_model');
         $this->load->model('User_model');
     }
 
@@ -35,7 +36,7 @@ class API_ctrl extends CI_Controller {
 
         $kode_pelanggan     = $this->input->post('kode_pelanggan');
         $kode_gangguan      = $this->input->post('kode_gangguan');
-        $lang_lot           = $this->input->post('lang_lot');
+        $long_lat           = $this->input->post('long_lat');
         $nama_pelapor       = $this->input->post('nama_pelapor');
         $no_hp              = $this->input->post('no_hp');
         $alamat_gangguan    = $this->input->post('alamat_gangguan');
@@ -71,13 +72,16 @@ class API_ctrl extends CI_Controller {
         );
 
         $pelanggan = array(
-            'lang_lot'  => $lang_lot
+            'long_lat'  => $long_lat
         );
 
         $foto = $this->input->post('foto[]');
         for ($i = 0; $i < count($foto); $i++){
+            if($foto[$i]=="")
+                continue;
+                
             $fotos[] = array(
-                'kode_gangguan' => 12,
+                'kode_gangguan' => $kode_gangguan,
                 'foto'          => $foto[$i]
             );
         }
@@ -87,56 +91,27 @@ class API_ctrl extends CI_Controller {
         $this->db->insert_batch('detail_foto_gangguan', $fotos);
     }
 
-    public function update()
-    {
-        //$this->output->enable_profiler(TRUE);
-        $kode_gangguan      = $this->input->post('kode_gangguan');
-        $kode_cabang        = $_SESSION['kode_cabang'];
-        $id_pelanggan       = $this->input->post('id_pelanggan');
+    public function updatePelanggan(){
+        $kode_pelanggan     = $this->input->post('kode_pelanggan');
         $no_meter           = $this->input->post('no_meter');
-        $no_lapor           = $this->input->post('no_lapor');
-        $nama_pelapor       = $this->input->post('nama_pelapor');
-        $no_hp              = $this->input->post('no_hp');
-        $pembatas_daya      = $this->input->post('pembatas_daya');
+        $nama_pelanggan     = $this->input->post('nama_pelanggan');
+        $alamat_pelanggan   = $this->input->post('alamat_pelanggan');
+        $tarif              = $this->input->post('tarif');
+        $daya               = $this->input->post('daya');
+        $jenis_pelanggan    = $this->input->post('jenis_pelanggan');
+        $long_lat           = $this->input->post('long_lat');
 
-        $permasalahan       = $this->input->post('permasalahan');
-        $permasalahan_lain  = $this->input->post('permasalahan_lain');
-        $permasalahan       = $permasalahan == "Lain-lain"? $permasalahan_lain : $permasalahan;
-        
-        $keterangan         = $this->input->post('keterangan');
-        $kondisi            = $this->input->post('kondisi');
-        $tang_ampere        = $this->input->post('tang_ampere');
-
-        $perbaikan          = $this->input->post('perbaikan');
-        $perbaikan_lain     = $this->input->post('perbaikan_lain');
-        $perbaikan          = $perbaikan == "Lain-lain"? $perbaikan_lain : $perbaikan;
-
-        $nama_petugas1      = $this->input->post('nama_petugas1');
-        $nama_petugas2      = $this->input->post('nama_petugas2');
         $data = array(
-                'kode_cabang'   => $kode_cabang,
-                'id_pelanggan'  => $id_pelanggan,
-                'no_meter'      => $no_meter,
-                'no_lapor'      => $no_lapor,
-                'nama_pelapor'  => $nama_pelapor,
-                'no_hp'         => $no_hp,
-                'pembatas_daya' => $pembatas_daya,
-                'permasalahan'  => $permasalahan,
-                'keterangan'    => $keterangan,
-                'kondisi'       => $kondisi,
-                'tang_ampere'   => $tang_ampere,
-                'perbaikan'     => $perbaikan,
-                'nama_petugas1' => $nama_petugas1,
-                'nama_petugas2' => $nama_petugas2
-                );
-        if ($this->input->post('action')=="add"){
-            $this->Gangguan_model->input_data($data, 'master_gangguan');
-            $this->session->set_flashdata('msg', 'Berhasil Simpan');
-        }else{
-            $this->Gangguan_model->update_data($data, 'master_gangguan', $kode_gangguan);
-            $this->session->set_flashdata('msg', 'Berhasil Update');
-        }
-	redirect(site_url() . '\Wo_gangguan_ctrl');
+            'no_meter'          => $no_meter,
+            'nama_pelanggan'    => $nama_pelanggan,
+            'alamat_pelanggan'  => $alamat_pelanggan,
+            'tarif'             => $tarif,
+            'daya'              => $daya,
+            'jenis_pelanggan'   => $jenis_pelanggan,
+            'long_lat'          => $long_lat
+        );
+
+        $this->Pelanggan_model->update_data($data, 'master_pelanggan', $kode_pelanggan);
     }
 }
 ?>

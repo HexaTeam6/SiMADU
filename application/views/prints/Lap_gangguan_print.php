@@ -1,5 +1,5 @@
 <html>
-<head>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
           id="bootstrap-css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -161,6 +161,29 @@
             border-top: 1px solid #aaa;
             padding: 8px 0
         }
+        
+        .ttd_placeholder
+{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    margin: 1px;
+    position: relative;
+}
+
+.ttd {
+    position: absolute;
+    margin: auto; 
+    min-height: 100%;
+    min-width: 100%;
+
+    /* For the following settings we set 100%, but it can be higher if needed 
+    See the answer's update */
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
+}
 
         .foto {
             width: 60px;
@@ -176,20 +199,23 @@
 <div id="invoice">
     <div class="invoice overflow-auto">
         <div style="min-width: 600px">
-            <header>
+            <header style="padding:10px">
                 <div class="row">
-                    <div class="col" style="height:40px;width: 120px;">
+                    <div class="" style="height:40px;width: 120px; text-align:center">
                         <a target="_blank" href="https://lobianijs.com">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/438px-Logo_PLN.png"
-                                 data-holder-rendered="true" height="100px">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Logo_PLN.png/438px-Logo_PLN.png" data-holder-rendered="true" height="100px">
                         </a>
                     </div>
-                    <div class="col company-details">
+                    <div class="col" style="margin-left: -20px">
                         <h2 class="name" style="color:blue">
                             UID Jawa Timur
                         </h2>
                         <div>UP3 Surabaya Selatan</div>
                         <div>Jl. Ngagel Timur No. 14 - 16, Surabaya Telp. (031) 5042572</div>
+<div style="text-align:right"> <h6 style="
+    margin-bottom: 0px;
+">NO. 00001</h6>
+</div>
 
                     </div>
                 </div>
@@ -348,51 +374,23 @@
         </table>
 
         <div class="row" style="height: 220px;padding-top: 20px;padding-bottom: 30px;">
-            <div class="col" style="text-align: center;">
-                <div class="" style="text-align: center;">
-                    <img src="https://www.suaramerdeka.com/storage/images/2018/10/01/bergainser-meteran-listrik-5bb246f832986.jpg"
-                         height="140px">
+            
+            
+            <?php $i = 1;
+                foreach($foto as $row): ?>
+            
+                <div class="col" style="text-align: center;">
+                    <div class="" style="text-align: center;">
+                        <img src="data:image/png;base64, <?= $row->foto; ?>"
+                             height="140px">
+                    </div>
+                    <div class="" style="text-align: center;">
+                        Gambar <?= $i; ?>
+                    </div>
                 </div>
-                <div class="" style="text-align: center;">
-                    Gambar 1
-                </div>
-            </div>
-            <div class="col" style="text-align: center;">
-                <div class="">
-                    <img src="https://www.suaramerdeka.com/storage/images/2018/10/01/bergainser-meteran-listrik-5bb246f832986.jpg"
-                         height="140px">
-                </div>
-                <div class="" style="text-align: center;">
-                    Gambar 2
-                </div>
-            </div>
-            <div class="col" style="text-align: center;">
-                <div class="">
-                    <img src="https://www.suaramerdeka.com/storage/images/2018/10/01/bergainser-meteran-listrik-5bb246f832986.jpg"
-                         height="140px">
-                </div>
-                <div class="" style="text-align: center;">
-                    Gambar 3
-                </div>
-            </div>
-            <div class="col" style="text-align: center;">
-                <div class="">
-                    <img src="https://www.suaramerdeka.com/storage/images/2018/10/01/bergainser-meteran-listrik-5bb246f832986.jpg"
-                         height="140px">
-                </div>
-                <div class="" style="text-align: center;">
-                    Gambar 4
-                </div>
-            </div>
-            <div class="col" style="text-align: center;">
-                <div class="">
-                    <img src="https://www.suaramerdeka.com/storage/images/2018/10/01/bergainser-meteran-listrik-5bb246f832986.jpg"
-                         height="140px">
-                </div>
-                <div class="" style="text-align: center;">
-                    Gambar 5
-                </div>
-            </div>
+            <?php $i++; 
+                endforeach; ?>
+        
         </div>
 
         <div class="row" style="align-items: center; width: auto;justify-content: center;">
@@ -404,9 +402,14 @@
                         Pemakai (Pelanggan) tidak perlu membayar.
                     </li>
                     <li>
-                        Perbaikan / gangguan atas laporan Pemakai (Pelanggan), termasuk penggantian alat-alat listrik
-                        milik PT PLN (Persero),
-                        Pemakai (Pelanggan) tidak perlu membayar.
+                        Perbaikan kerusakan pada instalasi milik Pemakai (Pelanggan) adalah tanggung jawab pelanggan dan mohon dilakukan perbaikan oleh instalatir yang terdaftar di PT PLN (Persero).
+
+                    </li>
+                    <li>
+                        Mohon catatan bukti laporan ini agar dijaga tidak hilang.
+                    </li>
+                    <li>
+                        Bukti laporan ini akan diambil oleh petugas PLN (Persero) UID Jatim UP3 Surabaya Selatan pada waktu penormalan atau perbaikan.
                     </li>
                 </ul>
 
@@ -414,24 +417,38 @@
         </div>
 
         <div class="row" style="padding-top: 30px;padding-bottom: 40px;">
-            <div class="col" style="text-align: center;">
+           <div class="col" style="text-align: center;">
 
-                <div style="padding-bottom: 150px;">
+                <div style="">
                     Petugas
                 </div>
-                <div style="border-bottom: 1px solid black;width: 220px;margin: auto;">
+                <div class="" style="text-align: center;">
+                    <div class="ttd_placeholder" style=" margin: auto; ">
+                    
+                    <img class = "ttd" src="data:image/png;base64, <?= $data->ttd_petugas; ?>" width=220px>
+                    
+                    </div>
                 </div>
+                <div style="border-bottom: 1px solid black;width:220px;margin:auto"> <?= $data->nama_petugas1; ?> </div>
             </div>
+
+
 
             <div class="col" style="text-align: center;">
 
-                <div style="padding-bottom: 150px;">
+                <div style="">
                     Pelanggan
                 </div>
+                
                 <div class="" style="text-align: center;">
-                    <div style="border-bottom: 1px solid black;width:220px;margin: auto; ">
+                    <div class="ttd_placeholder" style=" margin: auto; ">
+                    
+                    <img class = "ttd" src="data:image/png;base64, <?= $data->ttd_pelanggan; ?>" width=220px>
+                    
                     </div>
                 </div>
+                
+                <div style="border-bottom: 1px solid black;width:220px;margin:auto"> <?= $data->nama_pelanggan; ?> </div>
             </div>
         </div>
 

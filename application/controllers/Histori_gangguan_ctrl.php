@@ -26,6 +26,7 @@ class Histori_gangguan_ctrl extends CI_Controller {
     {
         if(isset($_SESSION['username'])){
             $data['data'] = $this->Gangguan_model->get_laporan($kode_gangguan)->row();
+            $data['foto'] = $this->Gangguan_model->get_laporan_foto($kode_gangguan)->result();
 //            echo json_encode($data);
             $this->load->view('prints/Lap_gangguan_print',$data);
         }

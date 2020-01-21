@@ -51,6 +51,10 @@ class Gangguan_model extends CI_Model{
             WHERE mg.kode_gangguan = '.$kode_gangguan.'
             AND mg.kode_pelanggan = mp.kode_pelanggan');
     }
+    
+     function get_laporan_foto($kode_gangguan){
+        return $this->db->query('SELECT foto FROM detail_foto_gangguan WHERE kode_gangguan ='.$kode_gangguan.'');
+    }
 	
 	function get_data_gangguan(){
 		return $this->db->query('SELECT * FROM master_gangguan WHERE kode_cabang='.$_SESSION['kode_cabang'].'');

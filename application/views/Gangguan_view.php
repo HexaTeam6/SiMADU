@@ -49,13 +49,6 @@ $this->load->view('template/side');
                         </div>
                     </div>
 
-<!--                  <div class="form-group">-->
-<!--                    <label  class="col-sm-2 control-label">ID Pelanggan</label>-->
-<!--                    <div class="col-sm-10">-->
-<!--                      <input autocomplete="off" type="text" class="form-control" id="kode_pelanggan" name="kode_pelanggan" placeholder="ID Pelanggan">-->
-<!--                    </div>-->
-<!--                  </div>-->
-
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">Nomor Lapor</label>
                         <div class="col-sm-10">
@@ -95,7 +88,7 @@ $this->load->view('template/side');
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">Permasalahan</label>
                         <div class="col-sm-10">
-                            <select class="form-control permasalahan_select" id="permasalahan" name="permasalahan">
+                            <select class="form-control permasalahan_select" id="permasalahan" name="permasalahan[]" multiple="multiple">
                                 <option value="kWh Meter Macet">kWh Meter Macet</option>
                                 <option value="kWh Meter Terblokir">kWh Meter Terblokir</option>
                                 <option value="Wiring kWh Meter Terbakar">Wiring kWh Meter Terbakar</option>
@@ -110,13 +103,6 @@ $this->load->view('template/side');
                         </div>
                     </div>
 
-<!--                    <div class="form-group hidden" id="permasalahan_lain_input">-->
-<!--                        <label  class="col-sm-2 control-label">Permasalahan Lain</label>-->
-<!--                        <div class="col-sm-10">-->
-<!--                            <input autocomplete="off" type="text" class="form-control" id="permasalahan_lain" name="permasalahan_lain" placeholder="Permasalahan Lain">-->
-<!--                        </div>-->
-<!--                    </div>-->
-
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">Keterangan</label>
                         <div class="col-sm-10">
@@ -129,7 +115,8 @@ $this->load->view('template/side');
                         <div class="col-sm-10">
                             <select class="form-control" id="kondisi" name="kondisi">
                                 <option value="Tidak Sambung Langsung">Tidak Sambung Langsung</option>
-                                <option value="Sambung Langsung">Sambung Langsung</option>
+                                <option value="Sambung Langsung kWh Meter">Sambung Langsung kWh Meter</option>
+                                <option value="Sambung Langsung MCB">Sambung Langsung MCB</option>
                                 <option value="Selesai Diperbaiki">Selesai Diperbaiki</option>
                             </select>
                         </div>
@@ -145,28 +132,21 @@ $this->load->view('template/side');
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">Perbaikan</label>
                         <div class="col-sm-10">
-                            <select class="form-control perbaikan_select" id="perbaikan" name="perbaikan">
+                            <select class="form-control perbaikan_select" id="perbaikan" name="perbaikan[]" multiple="multiple">
                                 <option value="Penormalan CT">Penormalan CT</option>
-                                <option value="WO Ganti kWh Meter Macet">WO Ganti kWh Meter Macet</option>
-                                <option value="WO Ganti Kabel Wiring kWh Mater Terbakar">WO Ganti Kabel Wiring kWh Mater Terbakar</option>
-                                <option value="WO Ganti NH Fuse Terbakar">WO Ganti NH Fuse Terbakar</option>
-                                <option value="WO Ganti MCB Terbakar">WO Ganti MCB Terbakar</option>
-                                <option value="WO Ganti MCCB Terbakar">WO Ganti MCCB Terbakar</option>
-                                <option value="WO Ganti Panel APP Keropos">WO Ganti Panel APP Keropos</option>
-                                <option value="WO Ganti CT Terbakar">WO Ganti CT Terbakar</option>
-                                <option value="WO Ganti PT Terbakar">WO Ganti PT Terbakar</option>
-                                <option value="WO Ganti Relay Mati">WO Ganti Relay Mati</option>
-                                <option value="WO Gani Kubik Rusak">WO Gani Kubik Rusak</option>
+                                <option value="Ganti kWh Meter Macet">Ganti kWh Meter Macet</option>
+                                <option value="Ganti Kabel Wiring kWh Mater Terbakar">Ganti Kabel Wiring kWh Mater Terbakar</option>
+                                <option value="Ganti NH Fuse Terbakar">Ganti NH Fuse Terbakar</option>
+                                <option value="Ganti MCB Terbakar">Ganti MCB Terbakar</option>
+                                <option value="Ganti MCCB Terbakar">Ganti MCCB Terbakar</option>
+                                <option value="Ganti Panel APP Keropos">Ganti Panel APP Keropos</option>
+                                <option value="Ganti CT Terbakar">Ganti CT Terbakar</option>
+                                <option value="Ganti PT Terbakar">Ganti PT Terbakar</option>
+                                <option value="Ganti Relay Mati">Ganti Relay Mati</option>
+                                <option value="Gani Kubik Rusak">Gani Kubik Rusak</option>
                             </select>
                         </div>
                     </div>
-
-<!--                    <div class="form-group hidden" id="perbaikan_lain_input">-->
-<!--                        <label  class="col-sm-2 control-label">Perbaikan Lain</label>-->
-<!--                        <div class="col-sm-10">-->
-<!--                            <input autocomplete="off" type="text" class="form-control" id="perbaikan_lain" name="perbaikan_lain" placeholder="Perbaikan Lain">-->
-<!--                        </div>-->
-<!--                    </div>-->
 
                     <div class="form-group">
                         <label  class="col-sm-2 control-label">Nama Petugas 1</label>
@@ -208,10 +188,10 @@ $this->load->view('template/side');
           <div class="modal-body">              
                 <div class="box-body">
 
-                    <div class="form-group">
-                        <label  class="col-sm-4 control-label">Nomor Meter</label>
-                        <div class="col-sm-8" id="no_meter_info"></div>
-                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <label  class="col-sm-4 control-label">Nomor Meter</label>-->
+<!--                        <div class="col-sm-8" id="no_meter_info"></div>-->
+<!--                    </div>-->
 
                     <div class="form-group">
                         <label  class="col-sm-4 control-label">ID Pelanggan</label>
@@ -467,7 +447,9 @@ $this->load->view('template/controlside');
 $this->load->view('template/js');
 ?>
 <script>
-  $(function () { 
+  $(function () {
+      $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+
     $('#datatable').DataTable({
       "paging": true,
       "lengthChange": true,
@@ -481,24 +463,21 @@ $this->load->view('template/js');
         width : '100%',
         tags: true,
         allowClear : true,
-        placeholder: "ID Pelanggan",
-        dropdownParent: $("#myModal")
+        placeholder: "ID Pelanggan"
     });
 
       $(".permasalahan_select").select2({
           width : '100%',
           tags: true,
           allowClear : true,
-          placeholder: "Permasalahan",
-          dropdownParent: $("#myModal")
+          placeholder: "Permasalahan"
       });
 
       $(".perbaikan_select").select2({
           width : '100%',
           tags: true,
           allowClear : true,
-          placeholder: "Perbaikan",
-          dropdownParent: $("#myModal")
+          placeholder: "Perbaikan"
       });
 
       $(".kode_pelanggan_select").on("select2:select", function (e) {
@@ -525,20 +504,6 @@ $this->load->view('template/js');
            });
     });
 
-//    $("#permasalahan").change(function () {
-//        if($("#permasalahan").val() == "Lain-lain")
-//            $("#permasalahan_lain_input").removeClass("hidden");
-//        else
-//            $("#permasalahan_lain_input").addClass("hidden");
-//    });
-//
-//      $("#perbaikan").change(function () {
-//          if($("#perbaikan").val() == "Lain-lain")
-//              $("#perbaikan_lain_input").removeClass("hidden");
-//          else
-//              $("#perbaikan_lain_input").addClass("hidden");
-//      });
-
 	 $("#btnNew").click(function (){ 
 		$("#action").val("add");
          $("#kode_gangguan").val("");
@@ -560,7 +525,7 @@ $this->load->view('template/js');
     $('#datatable').on('click', '[id^=btnEdit]', function() {
         var $item = $(this).closest("tr");     
         $("#kode_gangguan").val($item.find(".kode_gangguan").val());
-        $("#kode_pelanggan").val($item.find(".kode_pelanggan").text());
+        $("#kode_pelanggan").val($item.find(".kode_pelanggan").text()).trigger('change');
         $("#no_meter").val($item.find(".no_meter").text());
         $("#no_lapor").val($item.find(".no_lapor").text());
         $("#nama_pelapor").val($item.find(".nama_pelapor").text());
@@ -568,25 +533,27 @@ $this->load->view('template/js');
         $("#alamat_gangguan").val($item.find(".alamat_gangguan").val());
         $("#pembatas_daya").val($item.find(".pembatas_daya").val());
 
-        var data = {
-            val: $item.find(".permasalahan").val(),
-            text: $item.find(".permasalahan").val()
-        };
-
-        var newOption = new Option(data.text, data.val, false, false);
-        $('.permasalahan_select').append(newOption).trigger('change').val(data.text);
+        var permasalahan = $item.find(".permasalahan").val().split(", ");
+        permasalahan.forEach(function (item) {
+            if (!$('.permasalahan_select').find("option[value='" + item + "']").length) {
+                var newOption = new Option(item, item, true, true);
+                $('.permasalahan_select').append(newOption);
+            }
+        });
+        $('.permasalahan_select').val(permasalahan).trigger('change');
 
         $("#keterangan").text($item.find(".keterangan").val());
         $("#kondisi").val($item.find(".kondisi").val());
         $("#tang_ampere").val($item.find(".tang_ampere").val());
 
-        var data = {
-            val: $item.find(".perbaikan").val(),
-            text: $item.find(".perbaikan").val()
-        };
-
-        var newOption = new Option(data.text, data.val, false, false);
-        $('.perbaikan_select').append(newOption).trigger('change').val(data.text);
+        var perbaikan = $item.find(".perbaikan").val().split(", ");
+        perbaikan.forEach(function (item) {
+            if (!$('.perbaikan_select').find("option[value='" + item + "']").length) {
+                var newOption = new Option(item, item, true, true);
+                $('.perbaikan_select').append(newOption);
+            }
+        });
+        $('.perbaikan_select').val(perbaikan).trigger('change');
 
         $("#nama_petugas1").val($item.find(".nama_petugas1").val());
         $("#nama_petugas2").val($item.find(".nama_petugas2").val());

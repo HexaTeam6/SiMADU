@@ -25,6 +25,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE-2.3.7/plugins/select2/select2.min.css')?>">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE-2.3.7/dist/css/AdminLTE.min.css')?>">
+    <!--Date Picker-->
+  <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE-2.3.7/plugins/daterangepicker/daterangepicker.css')?>">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect.

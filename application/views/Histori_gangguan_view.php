@@ -107,11 +107,54 @@ $this->load->view('template/side');
       </div>
     </div>
 
+    <div class="box">
+        <div class="box-header with-border">
+            <div class="box-title">Data Pelanggan</div>
+        </div>
+        <div class="box-body">
+            <div class="form-group col-md-4">
+                <label>ID Pelanggan</label>
+                <select class="form-control kode_pelanggan_select" id="kode_pelanggan" name="kode_pelanggan">
+                    <?php foreach ($pelanggan as $row):?>
+                        <option value="<?= $row->kode_pelanggan?>"><?= $row->kode_pelanggan?> - <?= $row->nama_pelanggan?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Nomor Meter</label>
+                <input type="text" class="form-control" name="no_meter" id="no_meter" readonly placeholder="Nomor Meter">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Nama Pelanggan</label>
+                <input type="text" class="form-control" name="nama_pelanggan" id="nama_pelanggan" readonly placeholder="Nama Pelanggan">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Alamat Pelanggan</label>
+                <input type="text" class="form-control" name="alamat_pelanggan" id="alamat_pelanggan" readonly placeholder="Alamat Pelanggan">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Tarif</label>
+                <input type="text" class="form-control" name="tarif" id="tarif" readonly placeholder="Tarif">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Daya</label>
+                <input type="text" class="form-control" name="daya" id="daya" readonly placeholder="Daya">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Jenis Pelanggan</label>
+                <input type="text" class="form-control" name="jenis_pelanggan" id="jenis_pelanggan" readonly placeholder="Jenis Pelanggan">
+            </div>
+        </div>
+    </div>
+
     <!-- Default box -->
-    <div class="box">        
-        <div class="box-header">
-          <h3 class="box-title">
-          </h3>
+    <div class="box">
+            <div class="box-header"><div class="input-group col-md-3" style="float: left">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" autocomplete="off" class="form-control pull-right" id="dateSearch" placeholder="Tanggal">
+            </div>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -123,6 +166,7 @@ $this->load->view('template/side');
 <!--              <th>Nomor Meter</th>-->
               <th>Nomor Lapor</th>
               <th>Nama Pelapor</th>
+              <th>Tanggal</th>
               <th>Actions</th>
             </tr>
             </thead>
@@ -138,6 +182,7 @@ $this->load->view('template/side');
 <!--                        <td class="no_meter">--><?php //echo $row->no_meter;?><!--</td>-->
                         <td class="no_lapor"><?php echo $row->no_lapor;?></td>
                         <td class="nama_pelapor"><?php echo $row->nama_pelapor;?></td>
+                        <td class="created_at"><?php echo date("Y-m-d", strtotime($row->created_at));?></td>
 
                         <input type="hidden" class="kode_gangguan" value="<?php echo $row->kode_gangguan;?>">
                         <input type="hidden" class="kode_user" value="<?php echo $row->kode_user;?>">
@@ -179,7 +224,7 @@ $this->load->view('template/side');
     </div><!-- /.box -->
 
 </section><!-- /.content -->
- 
+
 
  </div>
   <!-- /.content-wrapper -->
@@ -189,7 +234,7 @@ $this->load->view('template/controlside');
 $this->load->view('template/js');
 ?>
 <script>
-  $(function () { 
+  $(function () {
     $('#datatable').DataTable({
       "paging": true,
       "lengthChange": true,
@@ -197,7 +242,76 @@ $this->load->view('template/js');
       "ordering": true,
       "info": true,
       "autoWidth": false
+//        dom: 'Bfrtip',
+//        buttons: [
+//            'copyHtml5',
+//            'excelHtml5',
+//            'csvHtml5',
+//            'pdfHtml5'
+//        ]
     });
+
+      var table = $('#datatable').DataTable();
+      $("#kode_pelanggan").val(null).trigger('change');
+      $(".kode_pelanggan_select").select2({
+          allowClear : true,
+          placeholder: "ID Pelanggan"
+      });
+
+      $('#dateSearch').daterangepicker({
+          locale: {
+              format: 'YYYY-MM-DD'
+//              cancelLabel: 'Clear'
+          }
+
+      });
+      $('#dateSearch').val("");
+
+//      $('#dateSearch').on('cancel.daterangepicker', function(ev, picker) {
+//          table.columns.adjust().draw();
+//          $('#dateSearch').val('');
+//      });
+
+      $('#kode_pelanggan').on( 'keyup change clear', function () {
+          if ( table.search() !== this.value ) {
+              table
+                  .columns(1)
+                  .search( this.value )
+                  .draw();
+          }
+          else{
+              table
+                  .columns()
+                  .search('')
+                  .draw();
+          }
+      } );
+
+      $.fn.dataTable.ext.search.push(
+          function( settings, data, dataIndex ) {
+              date = $('#dateSearch').val().split(" - ");
+              var min = new Date(date[0]);
+              var max = new Date(date[1]);
+              date = new Date(data[4]);
+//              console.log(date);
+
+              if ( ( isNaN( min ) && isNaN( max ) ) ||
+                  ( isNaN( min ) && date <= max ) ||
+                  ( min <= date && isNaN( max ) ) ||
+                  ( min <= date && date <= max ) )
+              {
+                  return true;
+              }
+              return false;
+          }
+      );
+
+      $('#dateSearch').on( 'keyup change clear', function () {
+          var daterange = $('#dateSearch').val();
+          if (daterange != "")
+              table.draw();
+      });
+
     $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
         $(".alert-sucess").slideUp(500);
     });
@@ -211,6 +325,36 @@ $this->load->view('template/js');
           return false;
       });
 
+      $(".kode_pelanggan_select").on("keyup change clear", function (e) {
+          var kode_pelanggan = $("#kode_pelanggan").val();
+          if (kode_pelanggan){
+              $.ajax({
+                  url: "<?php echo site_url("/Wo_gangguan_ctrl/getDataPelanggan/");?>",
+                  dataType: 'text',
+                  type: "POST",
+                  contentType: 'application/x-www-form-urlencoded',
+                  data: {"kode_pelanggan": kode_pelanggan},
+                  success: function (result) {
+                      var result = JSON.parse(result);
+                      $("#no_meter").val(result.no_meter);
+                      $("#nama_pelanggan").val(result.nama_pelanggan);
+                      $("#alamat_pelanggan").val(result.alamat_pelanggan);
+                      $("#tarif").val(result.tarif);
+                      $("#daya").val(result.daya);
+                      var jenis_pelanggan = result.daya == 1 ? "Prabayar" : "Pascabayar";
+                      $("#jenis_pelanggan").val(jenis_pelanggan);
+                  }
+              });
+          }
+          else{
+              $("#no_meter").val("");
+              $("#nama_pelanggan").val("");
+              $("#alamat_pelanggan").val("");
+              $("#tarif").val("");
+              $("#daya").val("");
+              $("#jenis_pelanggan").val("");
+          }
+      });
 
       $('#datatable').on('click', '[id^=btnInfo]', function() {
         var $item = $(this).closest("tr");
@@ -229,7 +373,7 @@ $this->load->view('template/js');
         $("#nama_petugas2_info").text($item.find(".nama_petugas2").val());
     });
   });
-</script>   
+</script>
 <?php
 $this->load->view('template/endbody');
 ?>

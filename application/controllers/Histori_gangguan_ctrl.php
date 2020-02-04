@@ -7,6 +7,7 @@ class Histori_gangguan_ctrl extends CI_Controller {
     {
         parent::__construct();		
         $this->load->model('Gangguan_model');
+        $this->load->model('Pelanggan_model');
         $this->load->model('User_model');
     }
 
@@ -15,6 +16,7 @@ class Histori_gangguan_ctrl extends CI_Controller {
 		if(isset($_SESSION['username'])){
 			$data['data'] = $this->Gangguan_model->get_data_histori()->result();
 			$data['user'] = $this->User_model->tampil_data()->result();
+            $data['pelanggan']  = $this->Pelanggan_model->tampil_data()->result();
         	$this->load->view('Histori_gangguan_view',$data);
 		}
 		else{

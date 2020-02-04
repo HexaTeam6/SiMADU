@@ -24,6 +24,13 @@ class Wo_gangguan_ctrl extends CI_Controller {
 		}
     }
 
+    public function mobile(){
+        $data['data']       = $this->Gangguan_model->tampil_data()->result();
+        $data['user']       = $this->User_model->tampil_data()->result();
+        $data['pelanggan']  = $this->Pelanggan_model->tampil_data()->result();
+        $this->load->view('Gangguan_mobile_view',$data);
+    }
+
     public function update()
     {
         //$this->output->enable_profiler(TRUE);
@@ -35,11 +42,11 @@ class Wo_gangguan_ctrl extends CI_Controller {
         $no_hp              = $this->input->post('no_hp');
         $alamat_gangguan     = $this->input->post('alamat_gangguan');
         $pembatas_daya      = $this->input->post('pembatas_daya');
-        $permasalahan       = $this->input->post('permasalahan');
+        $permasalahan       = implode(", ",$this->input->post('permasalahan'));
         $keterangan         = $this->input->post('keterangan');
         $kondisi            = $this->input->post('kondisi');
         $tang_ampere        = $this->input->post('tang_ampere');
-        $perbaikan          = $this->input->post('perbaikan');
+        $perbaikan          = implode(", ",$this->input->post('perbaikan'));
         $nama_petugas1      = $this->input->post('nama_petugas1');
         $nama_petugas2      = $this->input->post('nama_petugas2');
         $data = array(

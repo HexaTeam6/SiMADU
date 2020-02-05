@@ -30,6 +30,42 @@ class Wo_gangguan_ctrl extends CI_Controller {
         $this->load->view('Gangguan_mobile_view',$data);
     }
 
+    public function update_mobile(){
+        $kode_gangguan      = $this->input->post('kode_gangguan');
+        $kode_cabang        = $_GET['kode_cabang'];
+        $kode_pelanggan     = $this->input->post('kode_pelanggan');
+        $no_lapor           = $this->input->post('no_lapor');
+        $nama_pelapor       = $this->input->post('nama_pelapor');
+        $no_hp              = $this->input->post('no_hp');
+        $alamat_gangguan     = $this->input->post('alamat_gangguan');
+        $pembatas_daya      = $this->input->post('pembatas_daya');
+        $permasalahan       = implode(", ",$this->input->post('permasalahan'));
+        $keterangan         = $this->input->post('keterangan');
+        $kondisi            = $this->input->post('kondisi');
+        $tang_ampere        = $this->input->post('tang_ampere');
+        $perbaikan          = implode(", ",$this->input->post('perbaikan'));
+        $nama_petugas1      = $this->input->post('nama_petugas1');
+        $nama_petugas2      = $this->input->post('nama_petugas2');
+        $data = array(
+            'kode_cabang'   => $kode_cabang,
+            'kode_pelanggan'=> $kode_pelanggan,
+            'no_lapor'      => $no_lapor,
+            'nama_pelapor'  => $nama_pelapor,
+            'no_hp'         => $no_hp,
+            'alamat_gangguan'=> $alamat_gangguan,
+            'pembatas_daya' => $pembatas_daya,
+            'permasalahan'  => $permasalahan,
+            'keterangan'    => $keterangan,
+            'kondisi'       => $kondisi,
+            'tang_ampere'   => $tang_ampere,
+            'perbaikan'     => $perbaikan,
+            'nama_petugas1' => $nama_petugas1,
+            'nama_petugas2' => $nama_petugas2
+        );
+        $this->Gangguan_model->input_data($data, 'master_gangguan');
+        redirect(site_url() . '\Wo_gangguan_ctrl\mobile?kode_cabang='.$kode_cabang);
+    }
+
     public function update()
     {
         //$this->output->enable_profiler(TRUE);

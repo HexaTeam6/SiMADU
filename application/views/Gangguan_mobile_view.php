@@ -67,7 +67,7 @@ desired effect
 
     <div class="box">
         <div class="box-body">
-            <form action="<?php echo site_url('Wo_gangguan_ctrl/update')?>" method="post">
+            <form action="<?php echo site_url('Wo_gangguan_ctrl/update_mobile')?>" method="post">
                 <div class="form-group">
                     <label>Nomor Meter</label>
                     <input autocomplete="off" type="text" readonly class="form-control" id="no_meter" name="no_meter" placeholder="Nomor Meter">

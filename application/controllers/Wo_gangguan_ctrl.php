@@ -25,9 +25,8 @@ class Wo_gangguan_ctrl extends CI_Controller {
     }
 
     public function mobile(){
-        $data['data']       = $this->Gangguan_model->tampil_data()->result();
-        $data['user']       = $this->User_model->tampil_data()->result();
-        $data['pelanggan']  = $this->Pelanggan_model->tampil_data()->result();
+        $kode_cabang = $_GET['kode_cabang'];
+        $data['pelanggan']  = $this->Pelanggan_model->tampil_data_mobile($kode_cabang)->result();
         $this->load->view('Gangguan_mobile_view',$data);
     }
 

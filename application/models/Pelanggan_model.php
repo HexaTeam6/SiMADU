@@ -15,6 +15,14 @@ class Pelanggan_model extends CI_Model{
 		AND kode_cabang = '.$_SESSION['kode_cabang'].'
 		ORDER BY kode_cabang DESC');
     }
+
+    function tampil_data_mobile($kode_cabang){
+        return $this->db->query('SELECT * FROM master_pelanggan
+		WHERE status_aktif = "YES" 
+		AND kode_cabang not in (1)
+		AND kode_cabang = '.$kode_cabang.'
+		ORDER BY kode_cabang DESC');
+    }
 	
 	function get_data_pelanggan($kode_pelanggan){
 		return $this->db->query('SELECT * FROM master_pelanggan

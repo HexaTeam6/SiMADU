@@ -58,6 +58,13 @@ $this->load->view('template/side');
                       <input required autocomplete="off" type="text" class="form-control" id="alamat_pelanggan" name="alamat_pelanggan" placeholder="Alamat">
                     </div>
                   </div>
+
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label">Nomor Telepon</label>
+                    <div class="col-sm-10">
+                      <input required autocomplete="off" type="text" class="form-control" id="telp_pelanggan" name="telp_pelanggan" placeholder="Nomor Telepon">
+                    </div>
+                  </div>
                   
                   <div class="form-group">
                     <label  class="col-sm-2 control-label">Tarif</label>
@@ -140,6 +147,11 @@ $this->load->view('template/side');
                   <div class="form-group">
                     <label  class="col-sm-4 control-label">Alamat Pelanggan</label>
                     <div class="col-sm-8" id="alamat_pelanggan_info"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label  class="col-sm-4 control-label">Nomer Telepon</label>
+                    <div class="col-sm-8" id="telp_pelanggan_info"></div>
                   </div>
 
                   <div class="form-group">
@@ -247,6 +259,7 @@ $this->load->view('template/side');
                         <td class="alamat_pelanggan"><?php echo $row->alamat_pelanggan; ?></td>
                         <td><?php echo $row->jenis_pelanggan=="1"? "Prabayar" : "Pascabayar";?></td>
 
+                        <input type="hidden" class="telp_pelanggan" value="<?php echo $row->telp_pelanggan;?>">
                         <input type="hidden" class="jenis_pelanggan" value="<?php echo $row->jenis_pelanggan;?>">
                         <input type="hidden" class="tarif" value="<?php echo $row->tarif;?>">
                         <input type="hidden" class="daya" value="<?php echo $row->daya;?>">
@@ -330,6 +343,7 @@ $this->load->view('template/js');
         $("#no_meter").val("");
         $("#nama_pelanggan").val("");
         $("#alamat_pelanggan").val("");
+        $("#telp_pelanggan").val("");
         $("#tarif").val("");
         $("#daya").val("");
         $("#jenis_pelanggan").val("");
@@ -343,6 +357,7 @@ $this->load->view('template/js');
         $("#no_meter").val($.trim($item.find(".no_meter").text()));
         $("#nama_pelanggan").val($.trim($item.find(".nama_pelanggan").text()));
         $("#alamat_pelanggan").val($.trim($item.find(".alamat_pelanggan").text()));
+        $("#telp_pelanggan").val($.trim($item.find(".telp_pelanggan").val()));
         $("#tarif").val($.trim($item.find(".tarif").val()));
         $("#daya").val($.trim($item.find(".daya").val()));
         $("#jenis_pelanggan").val($.trim($item.find(".jenis_pelanggan").val()));
@@ -356,6 +371,7 @@ $this->load->view('template/js');
         $("#no_meter_info").text($.trim($item.find(".no_meter").text()));
         $("#nama_pelanggan_info").text($.trim($item.find(".nama_pelanggan").text()));
         $("#alamat_pelanggan_info").text($.trim($item.find(".alamat_pelanggan").text()));
+        $("#telp_pelanggan_info").text($.trim($item.find(".telp_pelanggan").val()));
         $("#tarif_info").text($.trim($item.find(".tarif").val()));
         $("#daya_info").text($.trim($item.find(".daya").val()));
         $("#jenis_pelanggan_info").text($.trim($item.find(".jenis_pelanggan").text()));

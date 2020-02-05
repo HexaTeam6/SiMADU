@@ -28,6 +28,7 @@ class Pelanggan_ctrl extends CI_Controller {
         $no_meter           = $this->input->post('no_meter');
         $nama_pelanggan     = $this->input->post('nama_pelanggan');
         $alamat_pelanggan   = $this->input->post('alamat_pelanggan');
+        $telp_pelanggan     = $this->input->post('telp_pelanggan');
         $tarif              = $this->input->post('tarif');
         $daya               = $this->input->post('daya');
         $jenis_pelanggan    = $this->input->post('jenis_pelanggan');
@@ -37,6 +38,7 @@ class Pelanggan_ctrl extends CI_Controller {
             'kode_cabang'       => $kode_cabang,
             'no_meter'          => $no_meter,
             'nama_pelanggan'    => $nama_pelanggan,
+            'telp_pelanggan'    => $telp_pelanggan,
             'alamat_pelanggan'  => $alamat_pelanggan,
             'tarif'             => $tarif,
             'daya'              => $daya,

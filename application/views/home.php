@@ -25,15 +25,20 @@ $this->load->view('template/side');
                         <span class="info-box-icon"><i class="ion ion-android-warning"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Gangguan Hari Ini</span>
-                            <span class="info-box-number">5,200</span>
+                            <span class="info-box-text">Total Ganguan</span>
+                            <span class="info-box-number"><?= $total->total;?></span>
 
                             <div class="progress">
-                                <div class="progress-bar" style="width: 100%"></div>
+                                <div class="progress-bar" style="width: <?php
+                                if($total->total)
+                                    echo round($total->selesai/$total->total*100);
+                                else echo 0 ?>%"></div>
                             </div>
                             <span class="progress-description">
-                    50% Increase in 30 Days
-                  </span>
+                                <?php if($total->total)
+                                    echo round($total->selesai/$total->total*100);
+                                else echo 0 ?>% (<?= $total->selesai; ?>) Gangguan selesai
+                            </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -44,15 +49,20 @@ $this->load->view('template/side');
                         <span class="info-box-icon"><i class="ion ion-android-add"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Total Gangguan</span>
-                            <span class="info-box-number">92,050</span>
+                            <span class="info-box-text">Gangguan hari ini</span>
+                            <span class="info-box-number"><?= $today->total;?></span>
 
                             <div class="progress">
-                                <div class="progress-bar" style="width: 20%"></div>
+                                <div class="progress-bar" style="width: <?php
+                                if($today->total)
+                                    echo round($today->selesai/$today->total*100);
+                                else echo 0 ?>%"></div>
                             </div>
                             <span class="progress-description">
-                    20% Increase in 30 Days
-                  </span>
+                                <?php if($today->total)
+                                    echo round($today->selesai/$today->total*100);
+                                else echo 0 ?>% (<?= $today->selesai; ?>) Gangguan selesai
+                            </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -62,8 +72,8 @@ $this->load->view('template/side');
             <div class="row">
                 <div class="col-md-12">
                     <div class="box">
-                        <div class="box-header">
-
+                        <div class="box-header with-border">
+                            <h3></h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse">
                                     <i class="fa fa-minus"></i>
@@ -76,12 +86,14 @@ $this->load->view('template/side');
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-md-8">
-                                    <div class="chart">
-                                        <!-- Sales Chart Canvas -->
-                                        <canvas id="canvas"></canvas>
-                                    </div>
+                                <div class="col-md-7">
+                                    <center><h3>Grafik Total Gangguan per Bulan</h3></center>
+                                    <canvas id="lineGangguan"></canvas>
                                     <!-- /.chart-responsive -->
+                                </div>
+                                <div class="col-md-5">
+                                    <center><h3>Grafik Total Gangguan per Unit</h3></center>
+                                    <canvas id="pieGangguan"></canvas>
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -99,43 +111,88 @@ $this->load->view('template/side');
             </div>
             <!-- /.row -->
 
-            <!-- Main row -->
-            <div class="row">
-
-                <div class="col-md-4">
-                </div>
-                <!-- /.col -->
-            </div>
             <!-- /.row -->
         </section>
         <!-- /.content -->
     </div>
+
     <!-- /.content-wrapper -->
 <?php
 $this->load->view('template/foot');
 $this->load->view('template/controlside');
 $this->load->view('template/js');
 ?>
+
+<?php
+//random hex color
+function random_color_part() {
+    return str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT);
+}
+
+function random_color() {
+    return random_color_part() . random_color_part() . random_color_part();
+}
+
+//lineGangguan
+$month = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+$labelLine = [];
+$dataLine = [];
+$i=0;
+foreach ($monthly as $row){
+    $labelLine[$i] = $month[$row->bulan-1];
+    $dataLine[$i] = (int)$row->jumlah;
+    $i++;
+}
+
+//pieGangguan
+$labelPie = [];
+$dataPie = [];
+$color = [];
+$i=0;
+foreach ($unit as $row){
+    $labelPie[$i] = $row->nama;
+    $dataPie[$i] = (int)$row->jumlah;
+    $color[$i] = "#".random_color();
+    $i++;
+}
+?>
+
 <script>
     $(function () {
-        var ctx = $("#canvas");
+        var ctx = $("#lineGangguan");
         var chart = new Chart(ctx, {
             // The type of chart we want to create
             type: 'line',
 
             // The data for our dataset
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: [<?php echo '"'.implode('","',  $labelLine ).'"' ?>],
                 datasets: [{
                     label: 'Total Gangguan',
                     backgroundColor: '#f39c12',
                     borderColor: '#f39c12',
-                    data: [0, 10, 5, 2, 20, 30, 200]
+                    data: [<?php echo '"'.implode('","',  $dataLine ).'"' ?>]
                 }]
             },
+            options: {
+                responsive: true
+            }
+        });
 
-            // Configuration options go here
-            options: {}
+        var ctx = $("#pieGangguan");
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'pie',
+
+            // The data for our dataset
+            data: {
+                labels: [<?php echo '"'.implode('","',  $labelPie ).'"' ?>],
+                datasets: [{
+                    backgroundColor: [<?php echo '"'.implode('","',  $color ).'"' ?>],
+//                    borderColor: '#f39c12',
+                    data: [<?php echo '"'.implode('","',  $dataPie ).'"' ?>]
+                }]
+            }
         });
     });
 </script>

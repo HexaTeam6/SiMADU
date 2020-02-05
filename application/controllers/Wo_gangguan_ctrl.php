@@ -36,7 +36,7 @@ class Wo_gangguan_ctrl extends CI_Controller {
         $no_lapor           = $this->input->post('no_lapor');
         $nama_pelapor       = $this->input->post('nama_pelapor');
         $no_hp              = $this->input->post('no_hp');
-        $alamat_gangguan     = $this->input->post('alamat_gangguan');
+        $alamat_gangguan    = $this->input->post('alamat_gangguan');
         $pembatas_daya      = $this->input->post('pembatas_daya');
         $permasalahan       = implode(", ",(array) $this->input->post('permasalahan'));
         $keterangan         = $this->input->post('keterangan');

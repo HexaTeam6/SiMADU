@@ -149,13 +149,15 @@ $this->load->view('template/side');
 
     <!-- Default box -->
     <div class="box">
-            <div class="box-header"><div class="input-group col-md-3" style="float: left">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
+            <div class="box-header">
+                <div class="input-group col-md-3" style="float: left">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" autocomplete="off" class="form-control pull-right" id="dateSearch" placeholder="Tanggal">
                 </div>
-                <input type="text" autocomplete="off" class="form-control pull-right" id="dateSearch" placeholder="Tanggal">
+                <input type="button" class="btn btn-danger" id="clear" value="Clear">
             </div>
-        </div>
         <!-- /.box-header -->
         <div class="box-body">
           <table id="datatable" class="table table-bordered table-hover">
@@ -261,16 +263,15 @@ $this->load->view('template/js');
       $('#dateSearch').daterangepicker({
           locale: {
               format: 'YYYY-MM-DD'
-//              cancelLabel: 'Clear'
           }
 
       });
-      $('#dateSearch').val("");
+      $("#clear").click(function () {
+          $('#dateSearch').val("");
+          table.draw()
+      });
 
-//      $('#dateSearch').on('cancel.daterangepicker', function(ev, picker) {
-//          table.columns.adjust().draw();
-//          $('#dateSearch').val('');
-//      });
+      $('#dateSearch').val("");
 
       $('#kode_pelanggan').on( 'keyup change clear', function () {
           if ( table.search() !== this.value ) {

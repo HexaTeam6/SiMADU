@@ -20,6 +20,11 @@
       <ul class="sidebar-menu">
         <li class="header">Menu</li>
         <!-- Optionally, you can add icons to the links -->
+          <li class='treeview'>
+              <a href='<?php echo site_url('home')?>'><i class='fa fa-dashboard'></i>
+                  <span>Dashboard</span>
+              </a>
+          </li>
         <?php echo $_SESSION['menu'];?>
       </ul>
       <!-- /.sidebar-menu -->

@@ -18,10 +18,10 @@
               <div class="col-md-4">
                   <!-- Info Boxes Style 2 -->
                   <div class="info-box bg-yellow">
-                      <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+                      <span class="info-box-icon"><i class="ion ion-android-warning"></i></span>
 
                       <div class="info-box-content">
-                          <span class="info-box-text">Total Gangguan</span>
+                          <span class="info-box-text">Gangguan Hari Ini</span>
                           <span class="info-box-number">5,200</span>
 
                           <div class="progress">
@@ -37,10 +37,10 @@
               <div class="col-md-4">
                   <!-- /.info-box -->
                   <div class="info-box bg-green">
-                      <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+                      <span class="info-box-icon"><i class="ion ion-android-add"></i></span>
 
                       <div class="info-box-content">
-                          <span class="info-box-text">Mentions</span>
+                          <span class="info-box-text">Total Gangguan</span>
                           <span class="info-box-number">92,050</span>
 
                           <div class="progress">
@@ -48,25 +48,6 @@
                           </div>
                           <span class="progress-description">
                     20% Increase in 30 Days
-                  </span>
-                      </div>
-                      <!-- /.info-box-content -->
-                  </div>
-              </div>
-              <div class="col-md-4">
-                  <!-- /.info-box -->
-                  <div class="info-box bg-red">
-                      <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
-
-                      <div class="info-box-content">
-                          <span class="info-box-text">Downloads</span>
-                          <span class="info-box-number">114,381</span>
-
-                          <div class="progress">
-                              <div class="progress-bar" style="width: 70%"></div>
-                          </div>
-                          <span class="progress-description">
-                    70% Increase in 30 Days
                   </span>
                       </div>
                       <!-- /.info-box-content -->
@@ -99,7 +80,7 @@
 
                                   <div class="chart">
                                       <!-- Sales Chart Canvas -->
-                                      <canvas id="salesChart" style="height: 180px; width: 1072px;" height="180" width="1072"></canvas>
+                                      <canvas id="canvas" style="display: block; width: 1000px; height: 500px;" width="1000" height="500" class="chartjs-render-monitor"></canvas>
                                   </div>
                                   <!-- /.chart-responsive -->
                               </div>

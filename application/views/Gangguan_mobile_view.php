@@ -75,7 +75,7 @@ desired effect
 
                 <div class="form-group">
                     <label>ID Pelanggan</label>
-                    <select class="form-control kode_pelanggan_select" id="kode_pelanggan" name="kode_pelanggan">
+                    <select class="form-control kode_pelanggan_select" id="kode_pelanggan" name="kode_pelanggan" required>
                         <?php foreach ($pelanggan as $row):?>
                             <option value="<?= $row->kode_pelanggan?>"><?= $row->kode_pelanggan?> - <?= $row->nama_pelanggan?></option>
                         <?php endforeach;?>
@@ -171,7 +171,7 @@ desired effect
                     <input autocomplete="off" type="text" class="form-control" id="nama_petugas2" name="nama_petugas2" placeholder="Nama Petugas 2">
                 </div>
 
-                <input type="hidden" name="action" id="action" value="add">
+                <input type="hidden" name="kode_cabang" value="<?= $_GET['kode_cabang']?>">
                 <button type="submit" class="btn btn-primary btnSave">Save changes</button>
             </form>
         </div>

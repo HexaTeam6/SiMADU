@@ -23,7 +23,7 @@
 
 <script src="<?php echo base_url('assets/AdminLTE-2.3.7/dist/js/app.min.js')?>"></script>
 <!--Chart-->
-<script src="<?php echo base_url('assets/AdminLTE-2.3.7/plugins/chartjs/Chart.js')?>"></script>
+<script src="<?php echo base_url('assets/AdminLTE-2.3.7/plugins/chartjs/Chart.bundle.js')?>"></script>
 <!-- JQuery Mask -->
 <script src="<?php echo base_url('assets/jquery-mask/jquery.mask.js')?>"></script>
 <!-- JQuery Input Mask -->

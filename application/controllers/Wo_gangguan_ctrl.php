@@ -31,19 +31,18 @@ class Wo_gangguan_ctrl extends CI_Controller {
     }
 
     public function update_mobile(){
-        $kode_gangguan      = $this->input->post('kode_gangguan');
-        $kode_cabang        = $_GET['kode_cabang'];
+        $kode_cabang        = $this->input->post('kode_cabang');
         $kode_pelanggan     = $this->input->post('kode_pelanggan');
         $no_lapor           = $this->input->post('no_lapor');
         $nama_pelapor       = $this->input->post('nama_pelapor');
         $no_hp              = $this->input->post('no_hp');
         $alamat_gangguan     = $this->input->post('alamat_gangguan');
         $pembatas_daya      = $this->input->post('pembatas_daya');
-        $permasalahan       = implode(", ",$this->input->post('permasalahan'));
+        $permasalahan       = implode(", ",(array) $this->input->post('permasalahan'));
         $keterangan         = $this->input->post('keterangan');
         $kondisi            = $this->input->post('kondisi');
         $tang_ampere        = $this->input->post('tang_ampere');
-        $perbaikan          = implode(", ",$this->input->post('perbaikan'));
+        $perbaikan          = implode(", ",(array) $this->input->post('perbaikan'));
         $nama_petugas1      = $this->input->post('nama_petugas1');
         $nama_petugas2      = $this->input->post('nama_petugas2');
         $data = array(
@@ -77,11 +76,11 @@ class Wo_gangguan_ctrl extends CI_Controller {
         $no_hp              = $this->input->post('no_hp');
         $alamat_gangguan     = $this->input->post('alamat_gangguan');
         $pembatas_daya      = $this->input->post('pembatas_daya');
-        $permasalahan       = implode(", ",$this->input->post('permasalahan'));
+        $permasalahan       = implode(", ",(array) $this->input->post('permasalahan'));
         $keterangan         = $this->input->post('keterangan');
         $kondisi            = $this->input->post('kondisi');
         $tang_ampere        = $this->input->post('tang_ampere');
-        $perbaikan          = implode(", ",$this->input->post('perbaikan'));
+        $perbaikan          = implode(", ",(array) $this->input->post('perbaikan'));
         $nama_petugas1      = $this->input->post('nama_petugas1');
         $nama_petugas2      = $this->input->post('nama_petugas2');
         $data = array(

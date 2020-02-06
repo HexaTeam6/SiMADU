@@ -25,11 +25,23 @@ class API_ctrl extends CI_Controller {
     public function getWoGangguan(){
         $kode_user      = $this->input->post('kode_user');
         $kode_cabang    = $this->input->post('kode_cabang');
-        $query = $this->API_model->getWoGangguan($kode_cabang,$kode_user);
-        if (count($query->result())>0)
-            echo json_encode($query->result());
-        else
+        $gangguan = $this->API_model->getWoGangguan($kode_cabang,$kode_user)->result();
+
+        if (count($gangguan)>0){
+            $data = array();
+            $fotos = array();
+            foreach ($gangguan as $parent){
+                $foto = $this->API_model->getFotoGangguan($parent->kode_gangguan)->result();
+                foreach ($foto as $child){
+                    $fotos["foto"][] = $child->foto;
+                }
+                $data[] = (array)$parent + $fotos;
+            }
+            echo json_encode($data);
+        }
+        else {
             echo false;
+        }
     }
 
     public function updateWoGangguan(){

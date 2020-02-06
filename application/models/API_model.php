@@ -20,6 +20,11 @@ class API_model extends CI_Model{
             ORDER BY mg.kode_gangguan DESC');
     }
 
+    function getFotoGangguan($kode_gangguan){
+        return $this->db->query('SELECT * FROM detail_foto_gangguan
+            WHERE kode_gangguan = "'.$kode_gangguan.'"');
+    }
+
     function input_data($data,$table){
         //$this->output->enable_profiler(TRUE);
         return $this->db->insert($table,$data);

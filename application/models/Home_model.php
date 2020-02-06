@@ -89,6 +89,7 @@ class Home_model extends CI_Model{
         return $this->db->query('SELECT mul.`nama`, COUNT(mg.`kode_user`) as jumlah FROM master_user_login mul, master_gangguan mg
                 WHERE mg.`kode_user` = mul.`kode_user`
                 AND mg.`kode_cabang` = '.$_SESSION['kode_cabang'].'
+                AND mg.`status_aktif` = "Yes"
                 GROUP BY mg.`kode_user`');
     }
 }

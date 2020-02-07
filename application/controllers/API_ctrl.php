@@ -36,6 +36,7 @@ class API_ctrl extends CI_Controller {
                     $fotos["foto"][] = $child->foto;
                 }
                 $data[] = (array)$parent + $fotos;
+                $fotos = [];
             }
             echo json_encode($data);
         }
